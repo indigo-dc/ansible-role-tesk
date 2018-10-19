@@ -1,0 +1,19 @@
+---
+# defaults file for ansible-role-tesk
+
+tesk_FS_path: '/TESK'
+tesk_deployment_path: '/TESK/deployment/common'
+
+tesk_sevice_type: 'NodePort'
+tesk_port: '30080'
+
+tesk_version: 'master'
+
+# mode: auth/noauth
+auth_mode: 'noauth'
+
+# FTP
+taskmaster_ftp_secret_name: 'ftp-secret'
+teskmaster_ftp_url: 'ftp://ftp-private.ebi.ac.uk'
+teskmaster_ftp_user: 'user'
+teskmaster_ftp_password: 'password'

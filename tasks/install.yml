@@ -1,0 +1,36 @@
+---
+- name: Download TESK
+  git:
+    repo: 'https://github.com/EMBL-EBI-TSI/TESK.git'
+    dest: '{{ tesk_FS_path }}'
+    version: '{{ tesk_version }}'
+
+- name: Install shinto-cli
+  pip:
+    name: shinto-cli
+
+- name: Edit config.ini
+  ini_file:
+    dest: '{{ tesk_deployment_path }}/config.ini'
+    section: '{{ item.section }}'
+    option: '{{ item.option }}'
+    value: '{{ item.value}}'
+  with_items:
+    - { section: 'auth', option: 'mode', value: '{{ auth_mode }}' }
+    - { section: 'service', option: 'type', value: '{{ tesk_sevice_type }}' }
+
+- name: Build k8s yaml
+  shell: 'j2 -g "*.j2" config.ini'
+  args:
+    chdir: '{{ tesk_deployment_path }}'
+
+- name: Put tesk service on a specific port
+  lineinfile:
+    dest: '{{ tesk_deployment_path }}/tesk-svc.yaml'
+    insertafter: '- port: 8080'
+    line: '    nodePort: {{ tesk_port }}'
+
+- name: Build tesk
+  shell: 'kubectl create -f .'
+  args:
+    chdir: '{{ tesk_deployment_path }}'
