@@ -1,13 +1,38 @@
 ---
+#______________________________________
+# Install pip.
+# This prevent to install different pip versions.
+
+- name: Check pip
+  command: 'pip --version'
+  ignore_errors: true
+  changed_when: false # read-only task
+  register: pip_is_installed
+
+- name: '[EL] install pip'
+  yum:
+    name: 'python-pip'
+    state: present
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == "RedHat" and pip_is_installed.rc != 0
+
+- name: '[Ubuntu] Install pip'
+  apt:
+    name: 'python-pip'
+    state: present
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == "Debian" and pip_is_installed.rc != 0
+
+#______________________________________
+# Install and configure TESK
+
 - name: Download TESK
   git:
     repo: 'https://github.com/EMBL-EBI-TSI/TESK.git'
     dest: '{{ tesk_FS_path }}'
     version: '{{ tesk_version }}'
-
-- name: Install shinto-cli
-  pip:
-    name: shinto-cli
 
 - name: Edit config.ini
   ini_file:
