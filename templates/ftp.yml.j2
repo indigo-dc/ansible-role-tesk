@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ taskmaster_ftp_secret_name }}
+data:
+  username: {{ base64_teskmaster_ftp_user.stdout }}
+  password: {{ base64_teskmaster_ftp_password.stdout }}

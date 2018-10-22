@@ -13,6 +13,7 @@ tesk_version: 'master'
 auth_mode: 'noauth'
 
 # FTP
+mount_ftp: true
 taskmaster_ftp_secret_name: 'ftp-secret'
 teskmaster_ftp_url: 'ftp://ftp-private.ebi.ac.uk'
 teskmaster_ftp_user: 'user'

@@ -55,6 +55,9 @@
     insertafter: '- port: 8080'
     line: '    nodePort: {{ tesk_port }}'
 
+- include: ftp.yml
+  when: mount_ftp|bool
+
 - name: Build tesk
   shell: 'kubectl create -f .'
   args:
