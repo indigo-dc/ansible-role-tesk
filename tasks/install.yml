@@ -13,16 +13,12 @@
   yum:
     name: 'python-pip'
     state: present
-  become_user: root
-  become_method: sudo
   when: ansible_os_family == "RedHat" and pip_is_installed.rc != 0
 
 - name: '[Ubuntu] Install pip'
   apt:
     name: 'python-pip'
     state: present
-  become_user: root
-  become_method: sudo
   when: ansible_os_family == "Debian" and pip_is_installed.rc != 0
 
 #______________________________________
@@ -47,8 +43,6 @@
 - name: Download shinto-cli
   pip:
     name: shinto-cli
-  become_user: root
-  become_method: root
 
 - name: Build k8s yaml
   shell: 'j2 -g "*.j2" config.ini'
