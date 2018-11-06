@@ -12,5 +12,5 @@
     src: 'ftp.yml.j2'
     dest: '/tmp/ftp.yml'
 
-- name: Create the secret:
+- name: Create k8s secret
   command: 'kubectl create -f /tmp/ftp.yml'
