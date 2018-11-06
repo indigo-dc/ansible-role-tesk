@@ -1,7 +1,7 @@
-Role Name
-=========
+EBI-TESK ansible role
+=====================
 
-A brief description of the role goes here.
+This role install EBI-TESK: https://github.com/EMBL-EBI-TSI/TESK
 
 Requirements
 ------------
