@@ -1,0 +1,16 @@
+---
+- name:  Base64 encoding to convert ftp username to a base-64 representation.
+  shell: 'echo -n "{{ teskmaster_ftp_user }}" | base64'
+  register: base64_teskmaster_ftp_user
+
+- name: Base64 encoding to convert ftp password to a base-64 representation.
+  shell: 'echo -n "{{ teskmaster_ftp_password }}" | base64'
+  register: base64_teskmaster_ftp_password
+
+- name: Copy ftp secret recipe.
+  template:
+    src: 'ftp.yml.j2'
+    dest: '/tmp/ftp.yml'
+
+- name: Create the secret:
+  command: 'kubectl create -f /tmp/ftp.yml'
