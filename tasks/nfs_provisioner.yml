@@ -1,4 +1,9 @@
 ---
+- name: Create directories
+  file:
+    path: '{{ nfs_provisioner.0.path }}'
+    state: directory
+
 - name: export the directories editing the file /etc/exports
   lineinfile:
     dest: '/etc/exports'
