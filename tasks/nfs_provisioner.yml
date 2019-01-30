@@ -1,0 +1,38 @@
+---
+- name: export the directories editing the file /etc/exports
+  lineinfile:
+    dest: '/etc/exports'
+    regexp: "^{{ item.path }} "
+    line: "{{ item.path }} {{ item.export }}"
+    create: yes
+  with_items: "{{ nfs_provisioner }}"
+
+- set_fact:
+    nfs_service: "nfs"
+  when: ansible_os_family == "RedHat"
+
+- set_fact:
+    nfs_service: "nfs-kernel-server"
+  when: ansible_os_family == "Debian"
+
+- name: Restart NFS server service
+  service:
+    name: '{{ nfs_service }}'
+    state: restarted
+
+- name: Check if NFS server service is started
+  service:
+    name: '{{ nfs_service }}'
+    state: started
+
+- name: Install nfs-client provisioner stable
+  command: '/usr/local/bin/helm install stable/nfs-client-provisioner --set nfs.server={{ ansible_default_ipv4.address }} --set nfs.path={{ nfs_provisioner.0.path }}'
+  register: nfs_provisioner_install
+  ignore_errors: yes
+
+- fail:
+    msg: "{{ nfs_provisioner_install.stderr }}"
+  when: "nfs_provisioner_install.rc != 0 and '\"nfs-client\" already exists' not in nfs_provisioner_install.stderr"
+
+- name: Set nfs-client as default storage class
+  command: "/usr/bin/kubectl patch storageclass nfs-client -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}'"

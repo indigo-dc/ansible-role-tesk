@@ -1,6 +1,8 @@
 ---
-- stat: path='{{ tesk_FS_path }}/TESK'
-  register: tesk_installed
+- include: update_k8s_config.yml
 
-- include: install.yml
-  when: not tesk_installed.stat.exists
+#- stat: path='{{ tesk_FS_path }}/TESK'
+#  register: tesk_installed
+
+#- include: install.yml
+#  when: not tesk_installed.stat.exists

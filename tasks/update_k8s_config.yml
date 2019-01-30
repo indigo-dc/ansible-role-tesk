@@ -1,0 +1,2 @@
+---
+- include: '{{ provisioner }}_provisioner.yml'

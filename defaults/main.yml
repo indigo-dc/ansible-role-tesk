@@ -18,3 +18,18 @@ taskmaster_ftp_secret_name: 'ftp-secret'
 teskmaster_ftp_url: 'ftp://ftp-private.ebi.ac.uk'
 teskmaster_ftp_user: 'user'
 teskmaster_ftp_password: 'password'
+
+#______________________________________
+# Kubernetes customisation
+# Autoprovisioning
+# currently supported:
+# 1. nfs (default)
+provisioner: 'nfs'
+
+# NFS
+nfs_provisioner:
+  - path: '/export'
+    export: '*(rw,async,no_root_squash,no_subtree_check)'
+
+# CINDER
+# TODO
