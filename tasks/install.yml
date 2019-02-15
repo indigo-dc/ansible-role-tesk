@@ -27,7 +27,7 @@
 - name: Download TESK
   git:
     repo: 'https://github.com/EMBL-EBI-TSI/TESK.git'
-    dest: '{{ tesk_FS_path }}'
+    dest: '{{ tesk_path }}'
     version: '{{ tesk_version }}'
 
 - name: Edit config.ini
