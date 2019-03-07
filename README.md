@@ -6,12 +6,53 @@ This role install EBI-TESK: https://github.com/EMBL-EBI-TSI/TESK
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+A working Kubernetes cluster version 1.8 and later.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+---
+# defaults file for ansible-role-tesk
+
+``tesk_FS_path``: path to install TESK (default ``/``)
+
+``tesk_path``: TESK directory (default: ``/TESK``)
+
+``tesk_deployment_path``: tesk deployment recipes path (default: ``/TESK/deployment/common``)
+
+``tesk_sevice_type``: expose tesk service directly or not ( default: ``NodePort``)
+
+``tesk_port``: tesk port (default ``'30080``)
+
+``tesk_version``: tesk version to clone (default: ``master``)
+
+``auth_mode``: enable AAI (default: ``'noauth``)
+
+# Currentrly ftp configuration is mandatory!
+# It has to be enabled and configured!
+
+``mount_ftp``: mount ftp server (default: ``false``)
+
+``taskmaster_ftp_secret_name``: ftp secret name (default: ``ftp-secret``)
+
+``teskmaster_ftp_url``: ftp server url (default ``ftp://ftp-private.ebi.ac.uk``)
+
+``teskmaster_ftp_user``: ftp server username (default: ``user``)
+
+``teskmaster_ftp_password``: ftp server user password (default: ``password``)
+
+# Kubernetes customisation
+# Autoprovisioning is mandatory.
+# Currently supported: NFS (default)
+# Cinder will be soon provided, too.
+
+``provisioner``: set autoprovisioner (default: ``nfs``)
+
+# NFS provisioner configuration
+``nfs_provisioner``:
+
+  #. ``path``: nfs mountpoint (default: ``/export``)
+  #. ``export``: exports configuration (default: ``*(rw,async,no_root_squash,no_subtree_check)``)
 
 Dependencies
 ------------
