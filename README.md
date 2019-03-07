@@ -28,7 +28,7 @@ Role Variables
 ``auth_mode``: enable AAI (default: ``'noauth``)
 
 ### Currentrly ftp configuration is mandatory! ###
-### It has to be enabled and configured! ###
+It has to be enabled and configured!
 
 ``mount_ftp``: mount ftp server (default: ``false``)
 
