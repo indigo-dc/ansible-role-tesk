@@ -41,9 +41,8 @@ It has to be enabled and configured!
 ``teskmaster_ftp_password``: ftp server user password (default: ``password``)
 
 ### Kubernetes customisation ###
-### Autoprovisioning is mandatory. ###
-### Currently supported: NFS (default) ###
-### Cinder will be soon provided, too. ###
+Autoprovisioning is mandatory.
+Currently supported: NFS (default). Cinder will be soon added, too.
 
 ``provisioner``: set autoprovisioner (default: ``nfs``)
 
