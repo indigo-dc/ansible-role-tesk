@@ -49,9 +49,8 @@ Currently supported: NFS (default). Cinder will be soon added, too.
 ### NFS provisioner configuration ###
 ``nfs_provisioner``:
 
-  #. ``path``: nfs mountpoint (default: ``/export``)
-  
-  #. ``export``: exports configuration (default: ``*(rw,async,no_root_squash,no_subtree_check)``)
+ * ``path``: nfs mountpoint (default: ``/export``)
+ *``export``: exports configuration (default: ``*(rw,async,no_root_squash,no_subtree_check)``)
 
 Example Playbook
 ----------------
