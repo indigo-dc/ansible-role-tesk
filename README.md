@@ -11,7 +11,6 @@ A working Kubernetes cluster version 1.8 and later.
 Role Variables
 --------------
 
----
 # defaults file for ansible-role-tesk
 
 ``tesk_FS_path``: path to install TESK (default ``/``)
