@@ -60,7 +60,7 @@ Install and configure TESK:
 
     - hosts: servers
       roles:
-         - { role: indigo-dc.tesk, x: 42 }
+         - { role: indigo-dc.tesk }
 
 License
 -------
